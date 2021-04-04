@@ -56,7 +56,7 @@ namespace FlowersSale.Content.Auth
             this._newUser.last_name = lastName;
             this._newUser.first_name = firstName;
             this._newUser.name = secondName;
-            FrameManager.AuthFrame.Navigate(new RegistrationContent3(this._newUser));
+            FrameManager.AuthFrame.Navigate(RegistrationContext.Context.RegistrationContent3);
         }
     }
 }

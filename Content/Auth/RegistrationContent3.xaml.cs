@@ -87,7 +87,7 @@ namespace FlowersSale.Content.Auth
                 this._newUser.roll = Roll.User.ToString();
                 FlowersSaleEntities.GetContext().SaveChanges();
                 FlowersSaleEntities.GetContext().Reload();
-                MessageShow.Success($"Пользователь \"{this._newUser.login}\" был успешно создан/обновлен!");
+                MessageShow.Success($"Пользователь \"{this._newUser.login}\" был успешно создан!");
             }
             catch
             {
@@ -95,7 +95,6 @@ namespace FlowersSale.Content.Auth
             }
             // Переход на другую страницу
             FrameManager.AuthFrame.Navigate(new RegistrationContent4(this._newUser));
-
         }
 
         /// <summary>

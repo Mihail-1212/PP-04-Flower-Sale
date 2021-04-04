@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlowersSale.Windows"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Цветучено" Height="500" Width="900">
+        Title="Цветучено" Height="550" Width="950">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

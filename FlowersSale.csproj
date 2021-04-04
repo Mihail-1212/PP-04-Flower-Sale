@@ -119,6 +119,7 @@
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\FrameManager.cs" />
     <Compile Include="Utils\MessageShow.cs" />
+    <Compile Include="Utils\RegistrationContext.cs" />
     <Compile Include="Utils\StoreManager.cs" />
     <Compile Include="Utils\StringHelper.cs" />
     <Compile Include="Utils\WindowManager.cs" />

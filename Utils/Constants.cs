@@ -25,6 +25,8 @@ namespace FlowersSale.Utils
         public const String LOGIN_REGEX = @"^[\w]{2}\@[\w]{2}\.[\w]{2}$";
         public const String PASSWORD_REGEX = @"^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?+=_-])\S{8,255}$";
         public const String ALPHABET_REGEX = @"^[a-zA-Zа-яА-ЯёЁ]{1,255}$";
-        public const String PHONE_REGEX = @"^8\d{10}|\+7\d{10}$";
+        public const String NUMBER_REGEX = @"^[0-9]$";
+        public const String PHONE_REGEX = @"^(8|\+7)\d{10}$";
+
     }
 }

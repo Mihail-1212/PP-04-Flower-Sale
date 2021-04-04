@@ -31,6 +31,9 @@ namespace FlowersSale.Content.Auth
         {
             InitializeComponent();
             this._newUser = new Users();
+            RegistrationContext.Context = new RegistrationContext(this, 
+                new RegistrationContent2(this._newUser), 
+                new RegistrationContent3(this._newUser));
         }
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace FlowersSale.Content.Auth
             }
             this._newUser.login = login;
             this._newUser.password = StringHelper.GetHashString(password);
-            FrameManager.AuthFrame.Navigate(new RegistrationContent2(this._newUser));
+            FrameManager.AuthFrame.Navigate(RegistrationContext.Context.RegistrationContent2);
         }
     }
 }

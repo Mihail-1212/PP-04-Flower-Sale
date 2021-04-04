@@ -49,9 +49,9 @@
             <StackPanel.Resources>
                 <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RadioButtonMargin}"/>
             </StackPanel.Resources>
-            <RadioButton/>
+            <RadioButton />
             <RadioButton IsChecked="True"/>
-            <RadioButton/>
+            <RadioButton />
         </StackPanel>
 
     </Grid>

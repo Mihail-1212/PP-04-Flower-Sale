@@ -3,6 +3,8 @@ using FlowersSale.Utils;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,15 +16,15 @@ namespace FlowersSale.Content.Auth
     public partial class RegistrationContent4 : UserControl, INotifyPropertyChanged
     {
         private Users _newUser;
-        private Address address;
+        private Address _address;
         private FlowersSaleEntities saleEntities;   // Использование нового контекста для безопасной работы с другой сущностью
 
         public Address Address
         {
-            get => address;
+            get => _address;
             set
             {
-                this.address = value;
+                this._address = value;
                 OnPropertyChanged();
             }
         }
@@ -49,6 +51,17 @@ namespace FlowersSale.Content.Auth
 
         private void ButtonForward_Click(object sender, RoutedEventArgs e)
         {
+            var error = new StringBuilder();
+
+            if (!String.IsNullOrEmpty(this.TextBoxPorch.Text) && !Regex.IsMatch(this.TextBoxPorch.Text, Constants.NUMBER_REGEX))
+                error.AppendLine("Подъезд не является числом!");
+            if (!String.IsNullOrEmpty(this.TextBoxFloor.Text) && !Regex.IsMatch(this.TextBoxFloor.Text, Constants.NUMBER_REGEX))
+                error.AppendLine("Этаж не является числом!");
+            if (error.Length != 0)
+            {
+                MessageShow.Error(error.ToString());
+                return;
+            }
             if (this.Address.id == 0)
             {
                 this.saleEntities.Address.Add(Address);
