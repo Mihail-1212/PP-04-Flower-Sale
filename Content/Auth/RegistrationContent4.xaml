@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="FlowersSale.Content.Auth.RegistrationContent4"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlowersSale.Content.Auth"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/styles/MainDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Регистрация" Grid.ColumnSpan="2" Style="{StaticResource TextBlockTitle}" />
+
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="2" Header="Введите улицу:">
+            <TextBox x:Name="TextBoxStreet" Text="{Binding street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Введите дом:" >
+            <TextBox x:Name="TextBoxHouse" Text="{Binding house, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3" Grid.ColumnSpan="2" Header="Введите комнату:">
+            <TextBox x:Name="TextBoxRoom" Text="{Binding room, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </GroupBox>
+
+        <GroupBox Grid.Row="4" Grid.ColumnSpan="2" Header="Введите подъезд:">
+            <TextBox x:Name="TextBoxPorch" Text="{Binding porch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </GroupBox>
+
+        <GroupBox Grid.Row="5" Grid.ColumnSpan="2" Header="Введите этаж:">
+            <TextBox x:Name="TextBoxFloor" Text="{Binding floor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </GroupBox>
+
+        <Button Grid.Row="6"  Content="Назад" x:Name="ButtonBack" Click="ButtonBack_Click"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="Продолжить" x:Name="ButtonForward" Click="ButtonForward_Click"/>
+
+    </Grid>
+</UserControl>
