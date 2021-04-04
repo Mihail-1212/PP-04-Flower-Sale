@@ -10,26 +10,26 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="300px"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="1.0*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Grid.ColumnSpan="2" 
                    Stretch="Uniform"
                    HorizontalAlignment="Left"
-                   Width="450px"
-                   Height="400" VerticalAlignment="Top" 
+                   VerticalAlignment="Top" 
+                   Margin="0,0,0,80px"
                    Source="/Resources/images/background_0.png"/>
             <Frame Grid.Column="1"
                    NavigationUIVisibility="Hidden"
                    x:Name="AuthFrame"/>
         </Grid>
 
-        <Image Grid.Column="2" Stretch="Uniform" HorizontalAlignment="Right" Height="400" VerticalAlignment="Top" >
+        <Image Grid.Column="2" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,0,80px">
             <Image.Source>
                 <BitmapImage UriSource="/Resources/images/background_1.png" Rotation="Rotate270" />
             </Image.Source>

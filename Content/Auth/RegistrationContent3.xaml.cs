@@ -64,7 +64,8 @@ namespace FlowersSale.Content.Auth
                 this._newUser.id == 0 && 
                 FlowersSaleEntities.GetContext()
                 .Users.ToList()
-                .Where(v => v.login.Equals(this._newUser.login)).Count() != 0)
+                .Where(v => v.login.Equals(this._newUser.login)).Count() != 0
+                )
                 errors.AppendLine($"Пользователь с логином {this._newUser.login} уже существует в системе!");
             if (errors.Length != 0)
             {

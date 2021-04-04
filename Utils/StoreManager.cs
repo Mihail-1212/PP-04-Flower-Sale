@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace FlowersSale.Utils
 {
@@ -35,6 +36,25 @@ namespace FlowersSale.Utils
             if (!@switch.ContainsKey(gender))
                 throw new NotImplementedException($"Вы не реализовали перевод из ключа \"{gender}\"");
             return @switch[gender];
+        }
+    }
+
+    /// <summary>
+    /// Класс расширения для Frame
+    /// </summary>
+    static class NewFrameClass
+    {
+
+        /// <summary>
+        /// Переход на первую страницу фрейма
+        /// </summary>
+        /// <param name="frame">Фрейм</param>
+        public static void GoFirstPage(this Frame frame)
+        {
+            while (frame.CanGoBack)
+            {
+                frame.GoBack();
+            }
         }
     }
 }
