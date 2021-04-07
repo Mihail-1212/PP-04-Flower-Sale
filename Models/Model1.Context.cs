@@ -10,10 +10,10 @@
 namespace FlowersSale.Models
 {
     using System;
-    using System.Linq;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Linq;
+
     public partial class FlowersSaleEntities : DbContext
     {
         private static FlowersSaleEntities _context;
@@ -41,11 +41,11 @@ namespace FlowersSale.Models
         }
     
         public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Items> Items { get; set; }
-        public virtual DbSet<ItemsOrder> ItemsOrder { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<ItemsOrder> ItemsOrder { get; set; }
     }
 }

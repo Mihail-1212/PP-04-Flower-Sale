@@ -4,17 +4,103 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowersSale.Windows"
+        xmlns:utils="clr-namespace:FlowersSale.Utils"
+        xmlns:converters="clr-namespace:FlowersSale.Converters"
         mc:Ignorable="d"
         Title="Цветучено" Height="550" Width="950">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/styles/MainDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BasketConverter x:Key="BasketConverter"/>
+            <converters:OrderConverter x:Key="OrderConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DockPanel>
-            <Button Content="Выйти" x:Name="ButtonLogout" Click="ButtonLogout_Click"/>
-        </DockPanel>
-        
+        <Grid Grid.RowSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.0*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.ColumnSpan="2" 
+                   Stretch="Uniform"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" 
+                   Opacity="0.5"
+                   Margin="0,0,0,80px"
+                   Source="/Resources/images/background_0.png"/>
+            <Image Grid.Column="2" Stretch="Uniform" HorizontalAlignment="Right" Opacity="0.5" VerticalAlignment="Top" Margin="0,0,0,80px">
+                <Image.Source>
+                    <BitmapImage UriSource="/Resources/images/background_1.png" Rotation="Rotate270" />
+                </Image.Source>
+            </Image>
+        </Grid>
+
+        <!-- Шапка приложения -->
+        <Border Padding="7px 5px">
+            <Border.Background>
+                <SolidColorBrush Color="#000" Opacity="0.65" />
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonImageLink}"/>
+                    </StackPanel.Resources>
+                    <Button x:Name="ButtonLinkVK" Click="ButtonLinkVK_Click">
+                        <Image Stretch="Uniform" Source="/Resources/images/vk.png"/>
+                    </Button>
+                    <Button x:Name="ButtonLinkInstagram" Click="ButtonLinkInstagram_Click" Margin="10px 0">
+                        <Image Stretch="Uniform" Source="/Resources/images/instagram.png"/>
+                    </Button>
+                    <Button x:Name="ButtonLinkTelegram" Click="ButtonLinkTelegram_Click">
+                        <Image Stretch="Uniform" Source="/Resources/images/telegramm.png"/>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Grid.ColumnSpan="3" 
+                           HorizontalAlignment="Center" Text="ЦВЕТУЧЕНО" 
+                           VerticalAlignment="Center"
+                           Foreground="#fff"
+                           Style="{StaticResource TextBlockTitle}"/>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonHeader}"/>
+                    </StackPanel.Resources>
+                    <Button Content="Назад" x:Name="ButtonBack" Click="ButtonBack_Click"/>
+                    <Button x:Name="ButtonBasket" Click="ButtonBasket_Click">
+                        <Binding Source="{x:Static utils:ItemsOrderManager.Context}" Path="ItemTotalCost" Converter="{StaticResource BasketConverter}" />
+                    </Button>
+                    <Button x:Name="ButtonCreateOrder" Click="ButtonCreateOrder_Click">
+                        <Binding Source="{x:Static utils:ItemsOrderManager.Context}" Path="ItemTotalCost" Converter="{StaticResource OrderConverter}" />
+                    </Button>
+                    <Button Content="Выйти" x:Name="ButtonLogout" Click="ButtonLogout_Click"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <!-- Тело приложения -->
+        <Grid Grid.Row="1">
+            <Frame NavigationUIVisibility="Hidden" 
+                   Margin="10px"
+                   x:Name="MainFrame"
+                   ContentRendered="MainFrame_ContentRendered"
+                   />
+        </Grid>
+
     </Grid>
 </Window>

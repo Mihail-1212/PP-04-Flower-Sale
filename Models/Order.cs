@@ -23,8 +23,8 @@ namespace FlowersSale.Models
         public int id { get; set; }
         public int id_user { get; set; }
     
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemsOrder> ItemsOrder { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

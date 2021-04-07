@@ -3,5 +3,6 @@
                     xmlns:local="clr-namespace:FlowersSale.Resources.styles">
 
     <SolidColorBrush Color="#FF69DE32" x:Key="BackgroundButtonColor"/>
-    
+    <SolidColorBrush Color="BurlyWood" x:Key="BackgroundGridColor"/>
+    <SolidColorBrush Color="AntiqueWhite" x:Key="BackgroundHoverBorderColor"/>
 </ResourceDictionary>

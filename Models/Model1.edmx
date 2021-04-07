@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FlowersSaleModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FlowersSaleModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id" />
@@ -42,6 +42,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_items" Type="int" Nullable="false" />
           <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="items_count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -174,8 +175,7 @@
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FlowersSaleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -192,15 +192,6 @@
           <Property Name="floor" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Address_Users" FromRole="Address" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Categories">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="src" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Items" Relationship="Self.FK_Items_Categories" FromRole="Categories" ToRole="Items" />
-        </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="id" />
@@ -210,18 +201,8 @@
           <Property Name="src" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="id_categories" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
-          <NavigationProperty Name="ItemsOrder" Relationship="Self.FK_ItemsOrder_Items" FromRole="Items" ToRole="ItemsOrder" />
-        </EntityType>
-        <EntityType Name="ItemsOrder">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_items" Type="Int32" Nullable="false" />
-          <Property Name="id_order" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Items" Relationship="Self.FK_ItemsOrder_Items" FromRole="ItemsOrder" ToRole="Items" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_ItemsOrder_Order" FromRole="ItemsOrder" ToRole="Order" />
+          <NavigationProperty Name="Categories" Relationship="FlowersSaleModel.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
+          <NavigationProperty Name="ItemsOrder" Relationship="FlowersSaleModel.FK_ItemsOrder_Items" FromRole="Items" ToRole="ItemsOrder" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -229,8 +210,8 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ItemsOrder" Relationship="Self.FK_ItemsOrder_Order" FromRole="Order" ToRole="ItemsOrder" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Order_Users" FromRole="Order" ToRole="Users" />
+          <NavigationProperty Name="ItemsOrder" Relationship="FlowersSaleModel.FK_ItemsOrder_Order" FromRole="Order" ToRole="ItemsOrder" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -273,48 +254,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Items_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Items">
-              <PropertyRef Name="id_categories" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemsOrder_Items">
-          <End Role="Items" Type="Self.Items" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ItemsOrder" Type="Self.ItemsOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ItemsOrder">
-              <PropertyRef Name="id_items" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItemsOrder_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ItemsOrder" Type="Self.ItemsOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ItemsOrder">
-              <PropertyRef Name="id_order" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -331,9 +270,7 @@
         </Association>
         <EntityContainer Name="FlowersSaleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Address" EntityType="Self.Address" />
-          <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Items" EntityType="Self.Items" />
-          <EntitySet Name="ItemsOrder" EntityType="Self.ItemsOrder" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
@@ -341,23 +278,87 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK_Items_Categories" Association="Self.FK_Items_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Items" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemsOrder_Items" Association="Self.FK_ItemsOrder_Items">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="ItemsOrder" EntitySet="ItemsOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItemsOrder_Order" Association="Self.FK_ItemsOrder_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="ItemsOrder" EntitySet="ItemsOrder" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Users" Association="Self.FK_Order_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <EntitySet Name="Categories" EntityType="FlowersSaleModel.Categories" />
+          <AssociationSet Name="FK_Items_Categories" Association="FlowersSaleModel.FK_Items_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <EntitySet Name="ItemsOrder" EntityType="FlowersSaleModel.ItemsOrder" />
+          <AssociationSet Name="FK_ItemsOrder_Items" Association="FlowersSaleModel.FK_ItemsOrder_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="ItemsOrder" EntitySet="ItemsOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsOrder_Order" Association="FlowersSaleModel.FK_ItemsOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ItemsOrder" EntitySet="ItemsOrder" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="src" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Items" Relationship="FlowersSaleModel.FK_Items_Categories" FromRole="Categories" ToRole="Items" />
+        </EntityType>
+        <Association Name="FK_Items_Categories">
+          <End Type="FlowersSaleModel.Categories" Role="Categories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FlowersSaleModel.Items" Role="Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="id_categories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ItemsOrder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_items" Type="Int32" Nullable="false" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="items_count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="FlowersSaleModel.FK_ItemsOrder_Items" FromRole="ItemsOrder" ToRole="Items" />
+          <NavigationProperty Name="Order" Relationship="FlowersSaleModel.FK_ItemsOrder_Order" FromRole="ItemsOrder" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_ItemsOrder_Items">
+          <End Type="FlowersSaleModel.Items" Role="Items" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FlowersSaleModel.ItemsOrder" Role="ItemsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItemsOrder">
+              <PropertyRef Name="id_items" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsOrder_Order">
+          <End Type="FlowersSaleModel.Order" Role="Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FlowersSaleModel.ItemsOrder" Role="ItemsOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItemsOrder">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -377,15 +378,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="FlowersSaleModel.Categories">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="src" ColumnName="src" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="FlowersSaleModel.Items">
               <MappingFragment StoreEntitySet="Items">
@@ -394,15 +386,6 @@
                 <ScalarProperty Name="src" ColumnName="src" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="id_categories" ColumnName="id_categories" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ItemsOrder">
-            <EntityTypeMapping TypeName="FlowersSaleModel.ItemsOrder">
-              <MappingFragment StoreEntitySet="ItemsOrder">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_items" ColumnName="id_items" />
-                <ScalarProperty Name="id_order" ColumnName="id_order" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -438,6 +421,25 @@
                 <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="roll" ColumnName="roll" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FlowersSaleModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="src" ColumnName="src" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsOrder">
+            <EntityTypeMapping TypeName="FlowersSaleModel.ItemsOrder">
+              <MappingFragment StoreEntitySet="ItemsOrder">
+                <ScalarProperty Name="items_count" ColumnName="items_count" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_items" ColumnName="id_items" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,6 @@
-﻿using FlowersSale.Utils;
+﻿using FlowersSale.Content.Main;
+using FlowersSale.Utils;
+using FlowersSale.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,8 @@ namespace FlowersSale.Windows
         public MainWindow()
         {
             InitializeComponent();
+            FrameManager.MainFrame = this.MainFrame;
+            FrameManager.MainFrame.Navigate(new MainContent());
         }
 
         private void ButtonLogout_Click(object sender, RoutedEventArgs e)
@@ -39,6 +43,52 @@ namespace FlowersSale.Windows
             AuthManager.Context.Logout();
             this.IsLogout = true;
             this.Close();
+        }
+
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            var currentFrame = sender as Frame;
+            this.ButtonBack.Visibility = currentFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+            if (currentFrame.Content is BasketContent || currentFrame.Content is CreateOrderContent)
+                this.ButtonBasket.Visibility = Visibility.Collapsed;
+            else
+                this.ButtonBasket.Visibility = Visibility.Visible;
+            if (currentFrame.Content is BasketContent)
+                this.ButtonCreateOrder.Visibility = Visibility.Visible;
+            else
+                this.ButtonCreateOrder.Visibility = Visibility.Collapsed;
+            FlowersSaleEntities.GetContext().Reload();
+
+        }
+
+        private void ButtonLinkVK_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://vk.com/syrprizko");
+        }
+
+        private void ButtonLinkInstagram_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.instagram.com/teddyflowers_perm/");
+        }
+
+        private void ButtonLinkTelegram_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://web.telegram.org/");
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.GoBack();
+        }
+
+        private void ButtonBasket_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new BasketContent());
+        }
+
+        private void ButtonCreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new CreateOrderContent());
         }
     }
 }

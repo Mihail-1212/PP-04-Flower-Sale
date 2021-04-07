@@ -9,9 +9,11 @@
 
 namespace FlowersSale.Models
 {
+    using FlowersSale.Utils;
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+
     public partial class Items
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,5 +31,17 @@ namespace FlowersSale.Models
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemsOrder> ItemsOrder { get; set; }
+        public String FullSrc
+        {
+            get
+            {
+                String src = $"{Constants.ITEM_IMAGE_PATH}\\{this.src}";
+                if (!File.Exists(src))
+                {
+                    return $"{Constants.ITEM_IMAGE_PATH}\\no_photo.png";
+                }
+                return src;
+            }
+        }
     }
 }

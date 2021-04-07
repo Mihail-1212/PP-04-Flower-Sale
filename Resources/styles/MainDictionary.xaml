@@ -5,12 +5,25 @@
         <ResourceDictionary Source="/Resources/styles/ColorDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ButtonImageLink">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="50px"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="12pt"/>
+    </Style>
+
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="{StaticResource BackgroundButtonColor}"/>
         <Setter Property="BorderBrush" Value="#000"/>
         <Setter Property="Padding" Value="15px 8px"/>
         <Setter Property="Margin" Value="3px 5px"/>
         <Setter Property="FontSize" Value="12pt"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="ButtonHeader">
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="BorderBrush" Value="#000"/>
+        <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockTitle">

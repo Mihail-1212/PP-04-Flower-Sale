@@ -17,6 +17,7 @@ namespace FlowersSale.Models
         public int id { get; set; }
         public int id_items { get; set; }
         public int id_order { get; set; }
+        public int items_count { get; set; }
     
         public virtual Items Items { get; set; }
         public virtual Order Order { get; set; }
