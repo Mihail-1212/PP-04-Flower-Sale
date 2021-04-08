@@ -10,8 +10,7 @@
 namespace FlowersSale.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Address
     {
         public int id { get; set; }

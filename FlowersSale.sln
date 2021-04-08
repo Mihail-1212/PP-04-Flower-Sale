@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowersSale", "FlowersSale.csproj", "{03BA83E2-77A1-4830-B9DD-64238D3B16A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowerSaleUnitTest", "..\FlowerSaleUnitTest\FlowerSaleUnitTest.csproj", "{78B9D746-86E1-4115-9B54-DA5E045D19FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{03BA83E2-77A1-4830-B9DD-64238D3B16A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BA83E2-77A1-4830-B9DD-64238D3B16A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BA83E2-77A1-4830-B9DD-64238D3B16A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B9D746-86E1-4115-9B54-DA5E045D19FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B9D746-86E1-4115-9B54-DA5E045D19FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B9D746-86E1-4115-9B54-DA5E045D19FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B9D746-86E1-4115-9B54-DA5E045D19FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
